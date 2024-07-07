@@ -28,3 +28,5 @@ router.put('/blogpost/:blogpostId', (req, res, next) => {
 router.delete('/blogpost/:blogpostId', (req, res, next) => {
     res.send('DELETE blogpost by ID - not implemented');
 });
+
+module.exports = router;

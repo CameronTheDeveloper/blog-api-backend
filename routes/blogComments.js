@@ -28,3 +28,5 @@ router.put('/comment/:commentId', (req, res, next) => {
 router.delete('/comment/:commentId', (req, res, next) => {
     res.send('DELETE comment by ID - not implemented');
 });
+
+module.exports = router;

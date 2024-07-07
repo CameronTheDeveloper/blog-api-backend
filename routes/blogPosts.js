@@ -7,25 +7,21 @@ router.get('/', function (req, res, next) {
 });
 
 
-// Routes for creating blog posts
-router.get('/create', (req, res, next) => {
-    res.send('GET create blogpost - not implemented');
-});
-
-router.post('/create', (req, res, next) => {
+// Route for creating blog posts
+router.post('/', (req, res, next) => {
     res.send('POST create blogpost - not implemented');
 });
 
 // Routes for specific blogpost operations
-router.get('/blogpost/:blogpostId', (req, res, next) => {
+router.get('/:blogpostId', (req, res, next) => {
     res.send('GET blogpost by ID - not implemented');
 });
 
-router.put('/blogpost/:blogpostId', (req, res, next) => {
+router.put('/:blogpostId', (req, res, next) => {
     res.send('PUT blogpost by ID - not implemented');
 });
 
-router.delete('/blogpost/:blogpostId', (req, res, next) => {
+router.delete('/:blogpostId', (req, res, next) => {
     res.send('DELETE blogpost by ID - not implemented');
 });
 

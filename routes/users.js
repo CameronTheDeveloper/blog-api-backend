@@ -7,25 +7,21 @@ router.get('/', function (req, res, next) {
 });
 
 
-// Routes for creating users
-router.get('/create', (req, res, next) => {
-  res.send('GET create user - not implemented');
-});
-
-router.post('/create', (req, res, next) => {
+// Route for creating users
+router.post('/', (req, res, next) => {
   res.send('POST create user - not implemented');
 });
 
 // Routes for specific user operations
-router.get('/user/:userId', (req, res, next) => {
+router.get('/:userId', (req, res, next) => {
   res.send('GET user by ID - not implemented');
 });
 
-router.put('/user/:userId', (req, res, next) => {
+router.put('/:userId', (req, res, next) => {
   res.send('PUT user by ID - not implemented');
 });
 
-router.delete('/user/:userId', (req, res, next) => {
+router.delete('/:userId', (req, res, next) => {
   res.send('DELETE user by ID - not implemented');
 });
 

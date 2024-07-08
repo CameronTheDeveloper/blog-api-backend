@@ -37,7 +37,7 @@ exports.user_post = [
             });
         } else {
             try {
-                bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
+                bcrypt.hash(req.body.userPassword, 10, async (err, hashedPassword) => {
                     if (err) {
                         return next(err);
                     } else {

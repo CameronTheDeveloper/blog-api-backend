@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const userController = require('../controllers/userController');
+
 // Root route for users
 router.get('/', function (req, res, next) {
   res.send('GET users - not implemented');
@@ -8,9 +10,7 @@ router.get('/', function (req, res, next) {
 
 
 // Route for creating users
-router.post('/', (req, res, next) => {
-  res.send('POST create user - not implemented');
-});
+router.post('/', userController.user_post);
 
 // Routes for specific user operations
 router.get('/:userId', (req, res, next) => {

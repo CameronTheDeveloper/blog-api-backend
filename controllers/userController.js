@@ -18,9 +18,7 @@ exports.user_post = [
         .trim()
         .isLength({ min: 8 })
         .withMessage('Password must be 8+ characters long')
-        .escape()
-        .isAlphanumeric()
-        .withMessage('Username has non-alphanumeric characters'),
+        .escape(),
 
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);

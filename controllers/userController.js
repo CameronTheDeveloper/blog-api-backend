@@ -6,6 +6,15 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
 
+exports.users_get = asyncHandler(async (req, res, next) => {
+    const users = await User.find({}, { password: 0, _id: 0 }).exec();
+
+    res.json({
+        message: 'List of users',
+        user_list: users
+    });
+});
+
 exports.user_post = [
     body('username')
         .trim()

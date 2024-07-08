@@ -4,9 +4,7 @@ const router = express.Router();
 const userController = require('../controllers/userController');
 
 // Root route for users
-router.get('/', function (req, res, next) {
-  res.send('GET users - not implemented');
-});
+router.get('/', userController.users_get);
 
 
 // Route for creating users

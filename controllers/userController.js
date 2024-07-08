@@ -19,6 +19,13 @@ exports.user_post = [
         .isLength({ min: 8 })
         .withMessage('Password must be 8+ characters long')
         .escape(),
+    body('confirmUserPassword')
+        .trim()
+        .custom((value, { req }) => {
+            return value === req.body.userPassword;
+        })
+        .withMessage('Password does not match confirmed password'),
+
 
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);

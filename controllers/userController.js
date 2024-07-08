@@ -9,15 +9,15 @@ const LocalStrategy = require('passport-local').Strategy;
 exports.user_post = [
     body('username')
         .trim()
-        .isLength({ min: 1 })
-        .withMessage('Username must be specified')
+        .isLength({ min: 3 })
+        .withMessage('Username must be 3+ characters long')
         .escape()
         .isAlphanumeric()
         .withMessage('Username has non-alphanumeric characters'),
     body('userPassword')
         .trim()
-        .isLength({ min: 1 })
-        .withMessage('Username must be specified')
+        .isLength({ min: 8 })
+        .withMessage('Password must be 8+ characters long')
         .escape()
         .isAlphanumeric()
         .withMessage('Username has non-alphanumeric characters'),

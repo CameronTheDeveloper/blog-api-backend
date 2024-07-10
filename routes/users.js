@@ -6,6 +6,8 @@ const userController = require('../controllers/userController');
 // Root route for users
 router.get('/', userController.users_get);
 
+router.get('/login', userController.user_login);
+
 
 // Route for creating users
 router.post('/', userController.user_post);

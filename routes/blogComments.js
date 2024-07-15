@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-// Root route for comments
-router.get('/', function (req, res, next) {
-    res.send('GET comments - not implemented');
-});
+const controller = require('../controllers/blogCommentContoller');
+
+// Route for specific blog post comments
+router.get('/', controller.blog_comments_get);
 
 
 // Route for creating comments

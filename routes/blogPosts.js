@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
+const controller = require('../controllers/blogPostController');
+
 // Root route for blog posts
-router.get('/', function (req, res, next) {
-    res.send('GET blogposts - not implemented');
-});
+router.get('/', controller.blogPost_list);
 
 
 // Route for creating blog posts

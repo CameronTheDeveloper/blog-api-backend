@@ -149,11 +149,14 @@ exports.user_put = [
                     username: req.body.username,
                     password: hashedPassword,
                     isBlogAuthor: false,
+                    _id: req.params.id
                 });
+
+                const updatedUser = await user.findByIdAndUpdate(req.params.id, user, {});
 
                 res.json({
                     message: 'User Updated',
-                    user: user
+                    user: updatedUser
                 });
             } catch (err) {
                 return next(err);

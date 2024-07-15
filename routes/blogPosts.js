@@ -15,9 +15,7 @@ router.get('/:blogpostId', (req, res, next) => {
     res.send('GET blogpost by ID - not implemented');
 });
 
-router.put('/:blogpostId', (req, res, next) => {
-    res.send('PUT blogpost by ID - not implemented');
-});
+router.put('/:blogpostId', controller.blogPost_put);
 
 router.delete('/:blogpostId', (req, res, next) => {
     res.send('DELETE blogpost by ID - not implemented');

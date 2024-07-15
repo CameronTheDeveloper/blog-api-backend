@@ -48,3 +48,42 @@ exports.blogPost_post = [
         }
     })
 ];
+
+exports.blogPost_put = [
+    body('blogTitle')
+        .trim()
+        .escape()
+        .isLength({ min: 1 })
+        .withMessage('Title is required'),
+    body('blogText')
+        .trim()
+        .escape()
+        .isLength({ min: 1 })
+        .withMessage('Text is required'),
+
+    asyncHandler(async (req, res, next) => {
+        const errors = validationResult(req);
+
+        const blogPost = new BlogPost({
+            title: req.body.blogTitle,
+            text: req.body.blogText,
+            author: req.user._id,
+            isPublished: false,
+            _id: req.params.id
+        });
+
+        if (!errors.isEmpty()) {
+            res.json({
+                message: 'Error filling out blog post form',
+                blogPost: blogPost,
+                errors: errors.array()
+            });
+        } else {
+            const updatedBlogPost = await BlogPost.findByIdAndUpdate(req.params.id, blogPost, {});
+            res.json({
+                message: 'Updated blog post',
+                blogPost: updatedBlogPost
+            });
+        }
+    })
+];

@@ -17,8 +17,6 @@ router.get('/:blogpostId', (req, res, next) => {
 
 router.put('/:blogpostId', controller.blogPost_put);
 
-router.delete('/:blogpostId', (req, res, next) => {
-    res.send('DELETE blogpost by ID - not implemented');
-});
+router.delete('/:blogpostId', controller.blogPost_delete);
 
 module.exports = router;

@@ -87,3 +87,18 @@ exports.blogPost_put = [
         }
     })
 ];
+
+exports.blogPost_delete = asyncHandler(async (req, res, next) => {
+    try {
+        const blogPost = await BlogPost.findById(req.params.id);
+
+        if (!blogPost) {
+            return res.status(404).json({ message: 'Blog Post not found' });
+        }
+
+        await BlogPost.findByIdAndDelete(req.params.id);
+        res.status(200).json({ message: 'Blog Post deleted' });
+    } catch (err) {
+        next(err);
+    }
+})

@@ -17,9 +17,7 @@ router.get('/:userId', (req, res, next) => {
   res.send('GET user by ID - not implemented');
 });
 
-router.put('/:userId', (req, res, next) => {
-  res.send('PUT user by ID - not implemented');
-});
+router.put('/:userId', userController.user_put);
 
 router.delete('/:userId', (req, res, next) => {
   res.send('DELETE user by ID - not implemented');

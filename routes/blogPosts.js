@@ -8,9 +8,7 @@ router.get('/', controller.blogPost_list);
 
 
 // Route for creating blog posts
-router.post('/', (req, res, next) => {
-    res.send('POST create blogpost - not implemented');
-});
+router.post('/', controller.blogPost_post);
 
 // Routes for specific blogpost operations
 router.get('/:blogpostId', (req, res, next) => {

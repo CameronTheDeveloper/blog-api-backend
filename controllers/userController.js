@@ -6,6 +6,18 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
 
+async function hashPassword(password) {
+    return new Promise((resolve, reject) => {
+        bcrypt.hash(password, 10, (err, hashedPassword) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(hashedPassword);
+            }
+        });
+    });
+}
+
 exports.users_get = asyncHandler(async (req, res, next) => {
     const users = await User.find({}, { password: 0, _id: 0 }).exec();
 
@@ -53,30 +65,23 @@ exports.user_post = [
             });
         } else {
             try {
-                bcrypt.hash(req.body.userPassword, 10, async (err, hashedPassword) => {
-                    if (err) {
-                        return next(err);
-                    } else {
-                        const user = new User({
-                            username: req.body.username,
-                            password: hashedPassword,
-                            isBlogAuthor: false,
-                        });
-                        await user.save();
+                const hashedPassword = await hashPassword(req.body.userPassword);
+                const user = new User({
+                    username: req.body.username,
+                    password: hashedPassword,
+                    isBlogAuthor: false,
+                });
+                await user.save();
 
-                        res.json({
-                            user: user,
-                            message: 'User Created'
-                        });
-                    }
+                res.json({
+                    user: user,
+                    message: 'User Created'
                 });
             } catch (err) {
                 return next(err);
             }
-
         }
     })
-
 ];
 
 passport.use(
@@ -102,3 +107,57 @@ exports.user_login = passport.authenticate('local', {
     failureRedirect: '/users/login'
 });
 
+exports.user_put = [
+    body('username')
+        .trim()
+        .isLength({ min: 3 })
+        .withMessage('Username must be 3+ characters long')
+        .escape()
+        .isAlphanumeric()
+        .withMessage('Username has non-alphanumeric characters'),
+    body('userPassword')
+        .trim()
+        .isLength({ min: 8 })
+        .withMessage('Password must be 8+ characters long')
+        .escape(),
+    body('confirmUserPassword')
+        .trim()
+        .custom((value, { req }) => {
+            return value === req.body.userPassword;
+        })
+        .withMessage('Password does not match confirmed password'),
+
+    asyncHandler(async (req, res, next) => {
+        const errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+
+            const user = new User({
+                username: req.body.username,
+                isBlogAuthor: false
+            });
+
+            res.json({
+                user: user,
+                errors: errors.array(),
+            });
+        } else {
+            try {
+                const hashedPassword = await hashPassword(req.body.password);
+
+                const user = new User({
+                    username: req.body.username,
+                    password: hashedPassword,
+                    isBlogAuthor: false,
+                });
+
+                res.json({
+                    message: 'User Updated',
+                    user: user
+                });
+            } catch (err) {
+                return next(err);
+            }
+        }
+    })
+];

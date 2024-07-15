@@ -19,8 +19,6 @@ router.get('/:userId', (req, res, next) => {
 
 router.put('/:userId', userController.user_put);
 
-router.delete('/:userId', (req, res, next) => {
-  res.send('DELETE user by ID - not implemented');
-});
+router.delete('/:userId', userController.user_delete);
 
 module.exports = router;

@@ -17,8 +17,6 @@ router.get('/:commentId', (req, res, next) => {
 
 router.put('/:commentId', controller.blog_comment_put);
 
-router.delete('/:commentId', (req, res, next) => {
-    res.send('DELETE comment by ID - not implemented');
-});
+router.delete('/:commentId', controller.blog_comment_delete);
 
 module.exports = router;

@@ -8,9 +8,7 @@ router.get('/', controller.blog_comments_get);
 
 
 // Route for creating comments
-router.post('/', (req, res, next) => {
-    res.send('POST create comment - not implemented');
-});
+router.post('/', controller.blog_comment_post);
 
 // Routes for specific comment operations
 router.get('/:commentId', (req, res, next) => {

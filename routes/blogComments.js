@@ -15,9 +15,7 @@ router.get('/:commentId', (req, res, next) => {
     res.send('GET comment by ID - not implemented');
 });
 
-router.put('/:commentId', (req, res, next) => {
-    res.send('PUT comment by ID - not implemented');
-});
+router.put('/:commentId', controller.blog_comment_put);
 
 router.delete('/:commentId', (req, res, next) => {
     res.send('DELETE comment by ID - not implemented');

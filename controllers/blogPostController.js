@@ -11,6 +11,21 @@ exports.blogPost_list = asyncHandler(async (req, res, next) => {
     });
 });
 
+exports.blogPost_detail = asyncHandler(async (req, res, next) => {
+    const blogPost = await BlogPost.findById(req.params.id).exec();
+
+    if (blogPost === null) {
+        const err = new Error("Blog Post not found");
+        err.status = 404;
+        return next(err);
+    }
+
+    res.json({
+        message: 'Blog Post',
+        blogPost: blogPost
+    });
+});
+
 exports.blogPost_post = [
     body('blogTitle')
         .trim()
@@ -101,4 +116,4 @@ exports.blogPost_delete = asyncHandler(async (req, res, next) => {
     } catch (err) {
         next(err);
     }
-})
+});

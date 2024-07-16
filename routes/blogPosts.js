@@ -11,9 +11,7 @@ router.get('/', controller.blogPost_list);
 router.post('/', controller.blogPost_post);
 
 // Routes for specific blogpost operations
-router.get('/:blogpostId', (req, res, next) => {
-    res.send('GET blogpost by ID - not implemented');
-});
+router.get('/:blogpostId', controller.blogPost_detail);
 
 router.put('/:blogpostId', controller.blogPost_put);
 

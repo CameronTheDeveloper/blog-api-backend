@@ -74,3 +74,18 @@ exports.blog_comment_put = [
 
     })
 ];
+
+exports.blog_comment_delete = asyncHandler(async (req, res, next) => {
+    try {
+        const comment = await BlogComment.findById(req.params.id);
+
+        if (!comment) {
+            return res.status(404).json({ message: 'Comment not found' });
+        }
+
+        await BlogComment.findByIdAndDelete(req.params.id);
+        res.status(200).json({ message: 'Comment deleted' });
+    } catch (err) {
+        next(err);
+    }
+});

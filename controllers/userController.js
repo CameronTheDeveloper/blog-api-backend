@@ -1,9 +1,13 @@
+require('dotenv').config();
+
 const User = require('../models/user');
 const asyncHandler = require('express-async-handler');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const jwt = require('jsonwebtoken');
+const jwtPassword = process.env.JWT_SECRET_KEY;
 
 
 async function hashPassword(password) {
@@ -102,7 +106,7 @@ passport.use(
     })
 );
 
-exports.user_login = passport.authenticate('local', {
+exports.user_login_post = passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/users/login'
 });

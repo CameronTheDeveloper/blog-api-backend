@@ -106,9 +106,23 @@ passport.use(
     })
 );
 
-exports.user_login_post = passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/users/login'
+exports.user_login_post = asyncHandler(async (req, res, next) => {
+
+    passport.authenticate('local', {
+        successRedirect: '/',
+        failureRedirect: '/users/login'
+    });
+
+    if (req.user) {
+        jwt.sign({ user: req.user }, { expiresIn: '1h' }, jwtPassword, (err, token) => {
+            if (err) {
+                return next(err);
+            }
+            res.json({ token: token });
+        });
+    } else {
+        res.json({ message: 'Log In unsuccessful' });
+    }
 });
 
 exports.user_put = [
